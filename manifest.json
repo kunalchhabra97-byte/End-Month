@@ -1,6 +1,6 @@
 {
-  "name": "My Money Month",
-  "short_name": "Money Month",
+  "name": "Month End",
+  "short_name": "Month End",
   "description": "Keep track. Spend mindfully. Make it to payday.",
   "start_url": "./",
   "scope": "./",
