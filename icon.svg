@@ -1,1 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#7657d8"/><circle cx="256" cy="256" r="174" fill="#a58ce9" opacity=".35"/><path d="M256 112c-76 0-130 44-130 106 0 53 38 83 104 94l47 8c35 6 52 17 52 36 0 24-29 40-73 40-47 0-85-18-113-48l-42 47c37 43 94 68 156 68 88 0 146-44 146-113 0-54-37-86-112-98l-45-7c-32-5-47-16-47-34 0-21 25-34 63-34 38 0 72 13 95 35l39-48c-34-34-85-52-140-52z" fill="#fff" transform="translate(0 -5) scale(1 1)"/><path d="M350 146c-20-20-49-31-84-31-63 0-106 31-106 78 0 42 31 65 87 75l42 7c31 5 47 15 47 33 0 22-26 36-65 36-42 0-73-16-96-39l-37 41c31 35 79 55 132 55 75 0 123-38 123-97 0-47-32-75-95-85l-39-6c-27-4-39-13-39-28 0-17 20-28 51-28 31 0 57 10 77 28z" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#F6EFE5"/>
+
+  <!-- Calendar body -->
+  <rect x="105" y="105" width="302" height="302" rx="52"
+        fill="#E6DCCB"/>
+
+  <!-- Calendar header -->
+  <rect x="105" y="105" width="302" height="100" rx="52"
+        fill="#85865B"/>
+  <rect x="105" y="155" width="302" height="50"
+        fill="#85865B"/>
+
+  <!-- Calendar binding -->
+  <rect x="166" y="76" width="30" height="92" rx="15"
+        fill="#F6EFE5" stroke="#85865B" stroke-width="12"/>
+  <rect x="316" y="76" width="30" height="92" rx="15"
+        fill="#F6EFE5" stroke="#85865B" stroke-width="12"/>
+
+  <!-- Calendar grid -->
+  <g fill="#F6EFE5" opacity="0.85">
+    <rect x="145" y="230" width="48" height="48" rx="14"/>
+    <rect x="232" y="230" width="48" height="48" rx="14"/>
+    <rect x="319" y="230" width="48" height="48" rx="14"/>
+    <rect x="145" y="306" width="48" height="48" rx="14"/>
+    <rect x="232" y="306" width="48" height="48" rx="14"/>
+    <rect x="319" y="306" width="48" height="48" rx="14"/>
+  </g>
+
+  <!-- Premium embossed coin -->
+  <circle cx="256" cy="284" r="93" fill="#85865B"/>
+  <circle cx="256" cy="284" r="79" fill="#E6DCCB"
+          stroke="#F6EFE5" stroke-width="8"/>
+  <circle cx="256" cy="284" r="68" fill="#85865B"/>
+
+  <!-- Rupee symbol -->
+  <text x="256" y="316"
+        font-family="Georgia, serif"
+        font-size="100"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="#F6EFE5">₹</text>
+
+  <!-- Subtle decorative detail -->
+  <circle cx="256" cy="284" r="103"
+          fill="none" stroke="#E6DCCB"
+          stroke-width="4" opacity="0.7"/>
+</svg>
