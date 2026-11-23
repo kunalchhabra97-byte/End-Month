@@ -27,13 +27,57 @@
 <section class="card"><div class="section-head"><h2 class="section-title">Recent Expenses</h2><span class="small" id="expenseCount">0 entries</span></div><div id="history"></div><button class="secondary" onclick="exportCSV()">Export expenses as CSV</button><button class="secondary" onclick="resetMonth()">Archive & start a new month</button></section>
 <section class="card"><h2 class="section-title">Monthly Budget</h2><div class="grid"><div class="field"><label>Money available this month (₹)</label><input id="income" type="number" min="0" placeholder="e.g. 60000"></div><div class="field"><label>Fixed bills / commitments (₹)</label><input id="fixed" type="number" min="0" placeholder="e.g. 15000"></div><div class="field"><label>Budget end date / payday</label><input id="endDate" type="date"></div><div class="field"><label>Monthly savings goal (₹)</label><input id="savings" type="number" min="0" placeholder="e.g. 5000"></div></div><button onclick="saveBudget()">Save Budget</button><p class="small" id="budgetStatus"></p></section>
 
+  <section class="card" id="settingsSection">
+<h2 class="section-title">Settings</h2>
+<p class="small">Your personal Month End preferences</p>
+
+<div class="field">
+<label>Personal Profile</label>
+<input id="profileName" placeholder="Your name">
+</div>
+
+<div class="field">
+<label>Email Address</label>
+<input id="profileEmail" type="email" placeholder="Your email">
+</div>
+
+<div class="field">
+<label>Currency Preference</label>
+<select id="currencyPreference">
+<option value="INR">Indian Rupee (₹ INR)</option>
+<option value="USD">US Dollar ($ USD)</option>
+<option value="EUR">Euro (€ EUR)</option>
+<option value="GBP">British Pound (£ GBP)</option>
+<option value="AED">UAE Dirham (AED)</option>
+</select>
+</div>
+
+<button onclick="saveProfile()">Save Profile</button>
+
+<hr style="border:0;border-top:1px solid var(--olive);margin:20px 0">
+
+<h3>Privacy & Security</h3>
+<p class="small">Your expense records are currently stored locally on this device.</p>
+
+<button class="secondary" onclick="exportCSV()">Download My Expenses</button>
+<button class="secondary" onclick="alert('Cloud backup and secure account login will be added in a future update.')">Cloud Backup & Sync</button>
+<button class="secondary" onclick="alert('Secure login and logout will be added when account authentication is implemented.')">Logout</button>
+<button class="secondary" onclick="alert('Account deletion will be available once accounts are implemented.')">Delete Account</button>
+</section>
   <div class="footer">Your data is saved in this browser on this device. Export regularly for backup.</div></div>
-<nav class="bottom-nav"><div class="nav-item active"><span class="nav-icon">⌂</span>Home</div><div class="nav-item" onclick="document.getElementById('history').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">▥</span>Expenses</div><div class="nav-item" onclick="document.getElementById('budgetStatus').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">◷</span>Budget</div><div class="nav-item" onclick="document.getElementById('settingsSection').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">⚙</span>Settings</div><span class="nav-icon">⚙</span>Settings</div></nav>
+<<nav class="bottom-nav"><div class="nav-item active"><span class="nav-icon">⌂</span>Home</div><div class="nav-item" onclick="document.getElementById('history').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">▥</span>Expenses</div><div class="nav-item" onclick="document.getElementById('budgetStatus').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">◷</span>Budget</div><div class="nav-item" onclick="document.getElementById('settingsSection').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">⚙</span>Settings</div></nav>
 <script>
 const KEY='mymoneymonth_v1';let state=JSON.parse(localStorage.getItem(KEY)||'{}');state.expenses=state.expenses||[];state.archives=state.archives||[];
 const today=new Date();const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);document.getElementById('expenseDate').value=iso(today);document.getElementById('monthLabel').textContent=today.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
 if(!state.endDate){let e=new Date(today.getFullYear(),today.getMonth()+1,0);state.endDate=iso(e)}
 function money(n){return '₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2})}function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function saveProfile(){
+state.profileName=document.getElementById('profileName').value.trim();
+state.profileEmail=document.getElementById('profileEmail').value.trim();
+state.currency=document.getElementById('currencyPreference').value;
+save();
+alert('Profile saved successfully!');
+}
 function saveBudget(){state.income=+document.getElementById('income').value||0;state.fixed=+document.getElementById('fixed').value||0;state.savings=+document.getElementById('savings').value||0;state.endDate=document.getElementById('endDate').value||state.endDate;save();render()}
 function addExpense(){let amount=+document.getElementById('expenseAmount').value;if(!amount||amount<=0){alert('Enter an expense amount');return}state.expenses.unshift({id:Date.now(),amount,category:document.getElementById('category').value,date:document.getElementById('expenseDate').value||iso(today),description:document.getElementById('description').value.trim()});document.getElementById('expenseAmount').value='';document.getElementById('description').value='';save();render()}
 function removeExpense(id){state.expenses=state.expenses.filter(e=>e.id!==id);save();render()}
