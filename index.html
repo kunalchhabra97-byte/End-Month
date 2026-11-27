@@ -241,10 +241,28 @@ function closeMenu(){
 
 function goTo(id){
   closeMenu();
-  document.querySelectorAll('.app-screen').forEach(screen=>screen.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+
+  document.querySelectorAll('.app-screen').forEach(screen=>{
+    screen.classList.add('hidden');
+  });
+
+  if(id === 'home'){
+    document.getElementById('homeScreen').classList.remove('hidden');
+    document.getElementById('homeStats').classList.remove('hidden');
+  }
+  else if(id === 'history'){
+    document.getElementById('expensesScreen').classList.remove('hidden');
+  }
+  else if(id === 'budget'){
+    document.getElementById('budgetScreen').classList.remove('hidden');
+  }
+  else if(id === 'settingsSection'){
+    document.getElementById('settingsSection').classList.remove('hidden');
+  }
+
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
   function render(){document.getElementById('income').value=state.income||'';document.getElementById('fixed').value=state.fixed||'';document.getElementById('savings').value=state.savings||'';document.getElementById('endDate').value=state.endDate;
 let spent=state.expenses.reduce((a,e)=>a+e.amount,0),available=Math.max(0,(state.income||0)-(state.fixed||0)-(state.savings||0)-spent);let base=Math.max(0,(state.income||0)-(state.fixed||0)-(state.savings||0));let end=new Date(state.endDate+'T00:00:00');let now=new Date();let days=Math.max(1,Math.ceil((end-now)/(86400000))+1);let daily=available/days;
 document.getElementById('remaining').textContent=money(available);document.getElementById('dailyText').textContent=money(daily);document.getElementById('daysDisplay').textContent=days;document.getElementById('spentLine').textContent=money(spent)+' Spent';document.getElementById('budgetLine').textContent='of '+money(base);document.getElementById('expenseCount').textContent=state.expenses.length+' entr'+(state.expenses.length===1?'y':'ies');
